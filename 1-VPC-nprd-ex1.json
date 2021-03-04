@@ -243,7 +243,93 @@
                 }
             }
         },
+        "SubnetRouteTableAssociationRTPUB1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPUB"
+                },
+                "SubnetId": {
+                    "Ref": "PUB1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPUB2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPUB"
+                },
+                "SubnetId": {
+                    "Ref": "PUB2"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPRI1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPRI"
+                },
+                "SubnetId": {
+                    "Ref": "PRI1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPRI2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPRI"
+                },
+                "SubnetId": {
+                    "Ref": "PRI2"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTCUS1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTCUS"
+                },
+                "SubnetId": {
+                    "Ref": "CUS1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTCUS2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTCUS"
+                },
+                "SubnetId": {
+                    "Ref": "CUS2"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTSEC1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTSEC"
+                },
+                "SubnetId": {
+                    "Ref": "SEC1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTSEC2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTSEC"
+                },
+                "SubnetId": {
+                    "Ref": "SEC2"
+                }
+            }
+        }
     }
 }
-
-
