@@ -116,7 +116,7 @@
                 }
             }
         },
-        "CUS116": {
+        "CUS1": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
                 "AvailabilityZone": "eu-west-3a",
@@ -132,7 +132,7 @@
                 }
             }
         },
-        "CUS216": {
+        "CUS2": {
             "Type": "AWS::EC2::Subnet",
             "Properties": {
                 "AvailabilityZone": "eu-west-3b",
@@ -333,5 +333,3 @@
         }
     }
 }
-
-
