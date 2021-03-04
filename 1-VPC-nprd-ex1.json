@@ -1,0 +1,337 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+	
+        "vpcnprdcust": {
+			"Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "10.100.0.0/21",
+                "EnableDnsHostnames": "true",
+                "EnableDnsSupport": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "vpcnprdcust"
+                    },
+                    {
+                        "Key": "env",
+                        "Value": "all"
+                    }
+                ]
+            } 
+        },
+        "PUB1-128": {
+		    "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3a",
+                "CidrBlock": "10.100.0.0/25",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "PUB1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "PUB2-128": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3b",
+                "CidrBlock": "10.100.0.128/25",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "PUB2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "SEC1-128": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3a",
+                "CidrBlock": "10.100.1.0/25",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "PRI1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "SEC2-128": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3b",
+                "CidrBlock": "10.100.1.128/25",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "PRI2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "PRI1-256": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3a",
+                "CidrBlock": "10.100.2.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "PRI1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "PRI2-256": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3b",
+                "CidrBlock": "10.100.3.0/24",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "PRI2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "CUS1-16": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3a",
+                "CidrBlock": "10.100.4.0/28",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "SEC1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "CUS2-16": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "eu-west-3b",
+                "CidrBlock": "10.100.4.16/28",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "SEC2"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "igwkuba": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "igw-kuba"
+                    },
+                    {
+                        "Key": "env",
+                        "Value": "all"
+                    }
+                ]
+            }
+        },
+		"igwkubavpcgatewayattach": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "igwkuba"
+                },
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },	
+		"RTPUB": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "RT-PUB"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "RTPRI": {
+		    "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "RT-PRI"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+
+        },
+        "RTCUS": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "RT-CUS"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "RTSEC": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "RT-SEC"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpcnprdcust"
+                }
+            }
+        },
+        "RouteRTPUB1": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "igwkuba"
+                },
+                "RouteTableId": {
+                    "Ref": "RTPUB"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPUB1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPUB"
+                },
+                "SubnetId": {
+                    "Ref": "PUB1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPUB2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPUB"
+                },
+                "SubnetId": {
+                    "Ref": "PUB2"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPRI1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPRI"
+                },
+                "SubnetId": {
+                    "Ref": "PRI1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTPRI2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTPRI"
+                },
+                "SubnetId": {
+                    "Ref": "PRI2"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTCUS1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTCUS"
+                },
+                "SubnetId": {
+                    "Ref": "CUS1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTCUS2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTCUS"
+                },
+                "SubnetId": {
+                    "Ref": "CUS2"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTSEC1": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTSEC"
+                },
+                "SubnetId": {
+                    "Ref": "SEC1"
+                }
+            }
+        },
+        "SubnetRouteTableAssociationRTSEC2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RTSEC"
+                },
+                "SubnetId": {
+                    "Ref": "SEC2"
+                }
+            }
+        }
+    }
+}
+
+
