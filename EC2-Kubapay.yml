@@ -30,6 +30,6 @@ Resources:
       - Description: Primary network interface
         DeviceIndex: 0
         SubnetId: subnet-64a13d02
-        PrivateIpAddress: 172.31.0.8/20
+        PrivateIpAddress: 172.31.0.8
         GroupSet:
         - Ref: SecurityGroupDemoSvrTraffic
