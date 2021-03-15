@@ -24,7 +24,7 @@ Resources:
           VolumeSize: '8'
           VolumeType: gp2
       ImageId: 'ami-042e8287309f5df03'
-      InstanceType: 't2.micro
+      InstanceType: 't2.micro'
       KeyName: 'ec2-jenkins'
       NetworkInterfaces:
       - Description: Primary network interface
