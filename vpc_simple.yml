@@ -122,35 +122,3 @@ Resources:
     Properties:
       SubnetId: !Ref PrivateSubnetB
       RouteTableId: !Ref PrivateRouteTable
-  SecurityGroupDemoSvrTraffic:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupName: sgDemoSvr
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: 22
-        ToPort: 22
-        CidrIp: 0.0.0.0/0
-        Description: For traffic from Internet
-      GroupDescription: Security Group for demo server
-      VpcId: "!Ref VPC"
-  EC2InstanceDemoSvr:
-    Type: AWS::EC2::Instance
-      Properties:
-      AvailabilityZone: !Select [ 0, !GetAZs ]
-      BlockDeviceMappings:
-      - DeviceName: "/dev/sda1"
-        Ebs:
-          DeleteOnTermination: 'true'
-          VolumeSize: '8'
-          VolumeType: gp2
-      ImageId: 'ami-042e8287309f5df03'
-      InstanceType: 't2.micro
-      KeyName: 'ec2-jenkins'
-      NetworkInterfaces:
-      - Description: Primary network interface
-        DeviceIndex: '0'
-        SubnetId: !Sub ${AWS::StackName}-Public-A
-        PrivateIpAddress: '10.1.10.10/24'
-        GroupSet:
-        - Ref: SecurityGroupDemoSvrTraffic
