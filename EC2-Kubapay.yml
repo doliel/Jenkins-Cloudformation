@@ -1,0 +1,35 @@
+---
+Description: Create an EC2 instance by AWS CloudFormation
+Resources:
+  SecurityGroupDemoSvrTraffic:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: sgDemoSvr
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+        Description: For traffic from Internet
+      GroupDescription: Security Group for demo server
+      VpcId: "!Ref VPC"
+  EC2InstanceDemoSvr:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: !Select [ 0, !GetAZs ]
+      BlockDeviceMappings:
+      - DeviceName: "/dev/sda1"
+        Ebs:
+          DeleteOnTermination: 'true'
+          VolumeSize: '8'
+          VolumeType: gp2
+      ImageId: 'ami-042e8287309f5df03'
+      InstanceType: 't2.micro
+      KeyName: 'ec2-jenkins'
+      NetworkInterfaces:
+      - Description: Primary network interface
+        DeviceIndex: '0'
+        SubnetId: subnet-49a88404
+        PrivateIpAddress: '172.31.16.8/20'
+        GroupSet:
+        - Ref: SecurityGroupDemoSvrTraffic
