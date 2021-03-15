@@ -29,7 +29,7 @@ Resources:
       NetworkInterfaces:
       - Description: Primary network interface
         DeviceIndex: 0
-        SubnetId: subnet-49a88404
-        PrivateIpAddress: 172.31.16.8/20
+        SubnetId: subnet-64a13d02
+        PrivateIpAddress: 172.31.0.8/20
         GroupSet:
         - Ref: SecurityGroupDemoSvrTraffic
