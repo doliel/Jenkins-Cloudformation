@@ -12,7 +12,7 @@ Resources:
         CidrIp: 0.0.0.0/0
         Description: For traffic from Internet
       GroupDescription: Security Group for demo server
-      VpcId: "!Ref VPC"
+      VpcId: 'vpc-a1d27adc'
   EC2InstanceDemoSvr:
     Type: AWS::EC2::Instance
     Properties:
