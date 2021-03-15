@@ -136,7 +136,7 @@ Resources:
       VpcId: "!Ref VPC"
   EC2InstanceDemoSvr:
     Type: AWS::EC2::Instance
-    Properties:
+      Properties:
       AvailabilityZone: !Select [ 0, !GetAZs ]
       BlockDeviceMappings:
       - DeviceName: "/dev/sda1"
