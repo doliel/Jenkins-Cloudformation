@@ -12,24 +12,24 @@ Resources:
         CidrIp: 0.0.0.0/0
         Description: For traffic from Internet
       GroupDescription: Security Group for demo server
-      VpcId: 'vpc-a1d27adc'
+      VpcId: vpc-a1d27adc
   EC2InstanceDemoSvr:
     Type: AWS::EC2::Instance
     Properties:
       AvailabilityZone: !Select [ 0, !GetAZs ]
       BlockDeviceMappings:
-      - DeviceName: "/dev/sda1"
+      - DeviceName: /dev/sda1
         Ebs:
-          DeleteOnTermination: 'true'
-          VolumeSize: '8'
+          DeleteOnTermination: true
+          VolumeSize: 8
           VolumeType: gp2
-      ImageId: 'ami-042e8287309f5df03'
-      InstanceType: 't2.micro'
-      KeyName: 'ec2-jenkins'
+      ImageId: ami-042e8287309f5df03
+      InstanceType: t2.micro
+      KeyName: ec2-jenkins
       NetworkInterfaces:
       - Description: Primary network interface
-        DeviceIndex: '0'
+        DeviceIndex: 0
         SubnetId: subnet-49a88404
-        PrivateIpAddress: '172.31.16.8/20'
+        PrivateIpAddress: 172.31.16.8/20
         GroupSet:
         - Ref: SecurityGroupDemoSvrTraffic
